@@ -57,7 +57,7 @@ function completeTask(task) {
   const i = task.slice(1);
   // Decrement the number of tasks for the team member who completed the task
   //ignore marking task completed for members greater than total member count
-  if(i <= teamMemberCount)
+  if(i <= teamMemberCount &&  teamTasks[i-1] != 0)
   {
       teamTasks[i-1] -= 1;
   }
