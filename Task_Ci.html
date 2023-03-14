@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+
+    <script>
+      let teamMemberCount = prompt("Enter total team members: ")
+//let teamTasks = [0, 0, 0, 0, 0]; // Initialize the list of tasks for each team member
+let  teamTasks= [];
+for(let i =0; i< teamMemberCount; i++)
+{
+    teamTasks[i] = 0;
+}
+console.log("initial Team Tasks: ", teamTasks);
+var inputFromUser;
+
+console.log("To assign a task press A");
+console.log("To mark a task completed press C and a number of the member whose task is completed. Example c1 - completed for user 1");
+console.log("Press Q to Quit");
+console.log("---------------------------------------------");
+do
+{
+    inputFromUser = prompt(`Team Tasks : ${teamTasks} \n \n Press A to assign task. \n Press  C followed by member id to complete task(e.g;C1 for member 1). \n Press Q to Quit.`)
+    let i = inputFromUser.toUpperCase().charCodeAt(0);
+    if(String.fromCharCode(i).toUpperCase() == "A")
+    {
+        assignTask(1);
+    }
+   
+    else if(String.fromCharCode(i).toUpperCase() == "C")
+    {
+        completeTask(inputFromUser.toUpperCase());
+    }
+}
+while(inputFromUser.toUpperCase() != "Q")
+function assignTask(task)
+{
+  // Find the index of the team member with the least amount of tasks
+  const minIndex = teamTasks.indexOf(Math.min(...teamTasks));
+ 
+  // Assign the new task to the least loaded team member
+  teamTasks[minIndex] += task;
+ 
+  // Print the updated list of tasks for each team member
+  console.log(`Team tasks: ${teamTasks}`);
+}
+
+function completeTask(task) {
+  // Find the index of the team member who completed the task
+  const i = task.slice(1);
+  // Decrement the number of tasks for the team member who completed the task
+  //ignore marking task completed for members greater than total member count
+  if(i <= teamMemberCount)
+  {
+      teamTasks[i-1] -= 1;
+  }
+ 
+  // Print the updated list of tasks for each team member
+  console.log(`Team tasks: ${teamTasks}`);
+}
+    </script>
+</body>
+</html>

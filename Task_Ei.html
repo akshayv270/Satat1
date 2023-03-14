@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   
+    <table>
+      <tbody id="arrayTable">
+      </tbody>
+    </table>
+
+    <script>
+        let array = [];
+let karray = [];
+let inputArraySize = prompt('Enter size for input array:');
+let kernalArraySize = prompt('Enter size for kernal array:');
+let outputArraySize = prompt('Enter size for output array:');
+for (let i = 0; i < inputArraySize; i++) {
+  let row = prompt(`Enter row ${i+1} with ${inputArraySize} numbers separated by commas: `);
+  let splitRow = row.split(",");
+  array.push(splitRow);
+}
+let inputImage = array;
+//console.log(array);
+/*const inputImage = [
+  [2,4,7,6,5],
+  [9,7,1,2,6],
+  [8,3,4,5,7],
+  [4,3,3,8,4],
+  [5,2,1,1,2]
+];*/
+for (let i = 0; i < kernalArraySize; i++) {
+  let row = prompt(`Enter row ${i+1} with ${kernalArraySize} numbers separated by commas: `);
+  let splitRow = row.split(",");
+  karray.push(splitRow);
+}
+// Define the kernel as a 2D array
+/*const kernel = [
+  [1, 0, -1],
+  [1, 0, -1],
+  [1, 0, -1]
+];*/
+let kernel = karray;
+
+// Define the output array as a 2D array of zeros
+/*const output = [
+  [0, 0, 0],
+  [0, 0, 0],
+  [0, 0, 0]
+];*/
+let output = [];
+// create empty 2D array
+let oarray = new Array(outputArraySize);
+for (let i = 0; i < outputArraySize; i++) {
+  oarray[i] = new Array(outputArraySize);
+}
+
+// fill array with 0s
+for (let i = 0; i < oarray; i++) {
+  for (let j = 0; j < oarray; j++) {
+    oarray[i][j] = 0;
+  }
+}
+output = oarray;
+
+// Loop over the input image
+for (let i = 1; i < inputImage.length - 1; i++) {
+  for (let j = 1; j < inputImage[i].length - 1; j++) {
+    // Loop over the kernel2,
+    let sum = 0;
+    for (let k = 0; k < kernel.length; k++) {
+      for (let l = 0; l < kernel[k].length; l++) {
+        // Multiply corresponding kernel and input image pixels and accumulate the result
+        sum += kernel[k][l] * inputImage[i + k - 1][j + l - 1];
+      }
+    }
+    // Add the result to the output array
+    output[i - 1][j - 1] = sum;
+  }
+}
+
+// Print the output array to the console
+console.log(output);
+
+
+var tableBody = document.getElementById("arrayTable");
+
+		// Loop through the rows and columns of the array to create the table
+		for(var i = 0; i < output.length; i++){
+			// Create a new row element
+			var row = document.createElement("tr");
+
+			// Loop through the columns of the current row to create the cells
+			for(var j = 0; j < output[i].length; j++){
+				// Create a new cell element
+				var cell = document.createElement("td");
+
+				// Set the text content of the cell to the value of the current array element
+				cell.textContent = output[i][j];
+
+				// Add the cell to the current row
+				row.appendChild(cell);
+			}
+
+			// Add the current row to the table body
+			tableBody.appendChild(row);
+		}
+
+document.getElementById("output").innerHTML =  "Output " + output ;
+    </script>
+</body>
+</html>

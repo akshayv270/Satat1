@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+  <div >Task A ---Skip word and recerce-----</div>
+    <input type="text" id="inp" >
+    <button onclick="abc()" >Submit</button>
+    <div id="output"></div>
+
+
+    <script>
+   // let input = "Hi there. My name is Sam. This is my lucky day. I like coding so much. This is it.";
+   let output = "";
+var n = 2;
+   
+
+
+
+//function to count the total number of words in a sentence
+function countWords(w) {
+
+
+   // alert("C am an alert box!");
+
+  var count = 0;
+  var words = w.split(" ");
+  for (i = 0; i < words.length; i++)
+  {
+    if (words[i] != "") {
+      count += 1;
+    }
+    console.log(count)
+  }
+
+  return (count);
+}
+
+//function to get last n words from a sentence
+function GetLastNWords(s)
+{
+    // alert("G am an alert box!");
+    let sublast2Words = s.split(" ");
+    return sublast2Words.slice(-n).join(" ");
+}
+
+//function to get the setence excluding the last N words of the sentence
+function GetAllWordsExceptLastN(s)
+{
+   // alert("GE am an alert box!");
+    let subAllExceptTwoWords = s.split(" ");
+        return subAllExceptTwoWords.slice(0, -n).join(" ");
+}
+
+//logic to get the sentence in reverse ordered words except last N words
+function abc(){
+
+
+    var input =  document.getElementById("inp").value;
+    console.log(input)
+
+let words = input.split("."); // split input into an array of words
+
+for(let i = 0; i< words.length; i++)
+{
+
+
+   
+   // alert("av am an alert box!");
+    let result = "";
+    var countOfWords = countWords(words[i]);
+    if(countOfWords > n)
+    {
+
+           
+   // alert("av am an alert box!");
+      let lastTwoWords = GetLastNWords(words[i]);
+      console.log(lastTwoWords);
+      let allWordsExceptLastTwo = GetAllWordsExceptLastN(words[i]);
+      let splitWords = allWordsExceptLastTwo.split(" ");
+      let reversedWords = splitWords.reverse().join(" ");
+      result = reversedWords.concat(lastTwoWords);
+      console.log(result);
+    }
+    else
+    {
+       result = words[i];
+    }
+    output = output.concat(result).concat(".").replace(/\.\.$/, ".");
+   
+    console.log(output);
+
+}
+//display output
+document.getElementById("output").innerHTML =  "Output " + output ;
+}
+
+
+
+
+    </script>
+    
+</body>
+
+    
+</html>
